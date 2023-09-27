@@ -12,7 +12,7 @@ class Head(nn.Module):
     # Input of size (batch, time-step, channels)
     # Output of size (batch, time-step, head size)
 
-    def __init__(self, head_size):  # head_size = d_k = d_v if we are used to the notation of the original paper
+    def __init__(self,cfg, head_size):  # head_size = d_k = d_v if we are used to the notation of the original paper
         super().__init__()
         self.values = nn.Linear(cfg['n_embed'], head_size, bias=False)
         self.keys = nn.Linear(cfg['n_embed'], head_size, bias=False)
@@ -43,7 +43,7 @@ class Head(nn.Module):
 class MultiHeadAttention(nn.Module):
     def __init__(self, cfg, head_size):
         super().__init__()
-        self.heads = nn.ModuleList([Head(head_size) for _ in range(cfg['num_heads'])])
+        self.heads = nn.ModuleList([Head(cfg, head_size) for _ in range(cfg['num_heads'])])
         self.proj = nn.Linear(cfg['n_embed'], cfg['n_embed'])
         self.dropout = nn.Dropout(cfg['dropout'])
 
@@ -132,6 +132,3 @@ class GPTmodel(nn.Module):
             idx = torch.cat((idx, idx_next), dim=1)
 
         return idx
-
-
-
