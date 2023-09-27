@@ -43,7 +43,7 @@ class Head(nn.Module):
 class MultiHeadAttention(nn.Module):
     def __init__(self, cfg, head_size):
         super().__init__()
-        self.heads = nn.ModuleList([Head(head_size) for _ in range(num_heads)])
+        self.heads = nn.ModuleList([Head(head_size) for _ in range(cfg['num_heads'])])
         self.proj = nn.Linear(cfg['n_embed'], cfg['n_embed'])
         self.dropout = nn.Dropout(cfg['dropout'])
 
