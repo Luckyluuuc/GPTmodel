@@ -13,7 +13,7 @@ def mapp(text): # return 2 dictionnaries mapping each token to an integers and v
   
   
 
-def encode(text, stoi = stoi):
+def encode(text, stoi):
   list_integers = []
   for c in text:
     list_integers.append(stoi.get(c))
@@ -21,7 +21,7 @@ def encode(text, stoi = stoi):
   return list_integers
 
 
-def decode(list_integers, itos=itos):
+def decode(list_integers, itos):
   text = []
   for i in list_integers:
     text.append(itos.get(i))
