@@ -5,7 +5,11 @@ def tokenize_text(text):
 
 def mapp(text): # return 2 dictionnaries mapping each token to an integers and vice versa
   list_token = sorted(list(set(text)))
-    vocab_size = len(list_token)
+  vocab_size = len(list_token)
+  stoi = {c:i for i,c in enumerate(list_token)}
+  itos = {i:c for i,c in enumerate(list_token)}
+
+  return vocab_size, stoi, itos
   
   
 
