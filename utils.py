@@ -37,7 +37,7 @@ def decode(list_integers, itos):
   text = ''.join(c for c in text) #delete this line if you want a list of char instead of a str
   return text
 
-def get_batch(split, block_size, batch_size, train_set, validation_set): #split is either "train" or "eval"
+def get_batch(split, block_size, batch_size, device, train_set, validation_set): #split is either "train" or "eval"
   assert split in ["train", "eval"], "split must be 'train' or 'eval'"
   data = train_set if split == "train" else validation_set
 
