@@ -15,7 +15,7 @@ def mapp(text): # return 2 dictionnaries mapping each token to an integers and v
   return vocab_size, stoi, itos
 
 def splitting_data(frac, data):
-    z = int(frac)*len(data)
+    z = int(frac*len(data))
     train_set = data[:z]
     validation_set = data[z:]
     return train_set, validation_set
