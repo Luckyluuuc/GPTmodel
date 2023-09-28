@@ -37,8 +37,8 @@ def decode(list_integers, itos):
   text = ''.join(c for c in text) #delete this line if you want a list of char instead of a str
   return text
 
-def get_batch(split, block_size, batch_size): #split is either "train" or "eval"
-  assert split in ["train", "eval"], "split must be 'train' or 'eval'"
+def get_batch(split, block_size, batch_size, device):
+  assert split in ["train", "eval"], "split must be 'train' or 'eval'"  #split is either "train" or "eval"
   data = train_set if split == "train" else validation_set
 
   ix = torch.randint(0, len(data) - block_size-1, (batch_size,)) # return a tensor of shape (batch_size) with random values bitween 0 and len(data) - block_size
