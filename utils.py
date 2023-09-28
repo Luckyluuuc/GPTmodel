@@ -37,11 +37,11 @@ def decode(list_integers, itos):
   text = ''.join(c for c in text) #delete this line if you want a list of char instead of a str
   return text
 
-def get_batch(split, block_size, batch_size, device):
-  assert split in ["train", "eval"], "split must be 'train' or 'eval'"  #split is either "train" or "eval"
+def get_batch(split, block_size, batch_size, train_set, validation_set): #split is either "train" or "eval"
+  assert split in ["train", "eval"], "split must be 'train' or 'eval'"
   data = train_set if split == "train" else validation_set
 
-  ix = torch.randint(0, len(data) - block_size-1, (batch_size,)) # return a tensor of shape (batch_size) with random values bitween 0 and len(data) - block_size
+  ix = torch.randint(0, len(data) - block_size-1, (batch_size,)) # return a tensor of shape (batch_size) with random values between 0 and len(data) - block_size
 
   x = torch.stack([torch.tensor(data[i:i + block_size]) for i in ix])
   y = torch.stack([torch.tensor(data[i + 1:i + block_size + 1]) for i in ix])
@@ -50,13 +50,13 @@ def get_batch(split, block_size, batch_size, device):
   return x, y
 
 @torch.no_grad()
-def estimate_loss(m, eval_iters):
+def estimate_loss(m, eval_iters, train_set, evalutation_set):
   out = {}
   m.eval()
   for split in ["train", "eval"]:
     losses = torch.zeros(eval_iters)
     for k in range(eval_iters):
-      X, Y = get_batch(split, cfg.get('block_size'), cfg.get('batch_size'), cfg.get("device"))
+      X, Y = get_batch(split, cfg.get('block_size'), cfg.get('batch_size'), cfg.get("device"), train_set, evalutation_set)
       logits, loss = m(X, Y)
       losses[k] = loss.item()
     out[split] = losses.mean()
