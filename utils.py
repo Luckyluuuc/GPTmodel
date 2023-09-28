@@ -50,13 +50,13 @@ def get_batch(split, block_size, batch_size, device, train_set, validation_set):
   return x, y
 
 @torch.no_grad()
-def estimate_loss(m, eval_iters, train_set, evalutation_set):
+def estimate_loss(m, eval_iters, train_set, evalutation_set, block_size, batch_size, device):
   out = {}
   m.eval()
   for split in ["train", "eval"]:
     losses = torch.zeros(eval_iters)
     for k in range(eval_iters):
-      X, Y = get_batch(split, cfg.get('block_size'), cfg.get('batch_size'), cfg.get("device"), train_set, evalutation_set)
+      X, Y = get_batch(split, block_size, batch_size, device, train_set, evalutation_set)
       logits, loss = m(X, Y)
       losses[k] = loss.item()
     out[split] = losses.mean()
