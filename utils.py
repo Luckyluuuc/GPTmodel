@@ -13,7 +13,12 @@ def mapp(text): # return 2 dictionnaries mapping each token to an integers and v
   itos = {i:c for i,c in enumerate(list_token)}
 
   return vocab_size, stoi, itos
-  
+
+def splitting_data(frac):
+    z = int(frac)*len(data_tok))
+    train_set = data_tok[:z]
+    validation_set = data_tok[z:]
+    return train_set, validation_set
   
 
 def encode(text, stoi):
