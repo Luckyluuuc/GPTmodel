@@ -1,11 +1,13 @@
 import torch
 import re
 
+#-----------------
+
 def tokenize_text(text):
     # Use a regular expression to tokenize the text into words while preserving spaces and line breaks
     tokens =  re.findall(r'\w+|[\.,;!?"]+|\n|\t|.', text)
     return tokens
-
+#-----------------
 def mapp(text): # return 2 dictionnaries mapping each token to an integers and vice versa
   list_token = sorted(list(set(text)))
   vocab_size = len(list_token)
@@ -13,6 +15,7 @@ def mapp(text): # return 2 dictionnaries mapping each token to an integers and v
   itos = {i:c for i,c in enumerate(list_token)}
 
   return vocab_size, stoi, itos
+#-----------------
 
 def splitting_data(frac, data):
     z = int(frac*len(data))
@@ -20,6 +23,7 @@ def splitting_data(frac, data):
     validation_set = data[z:]
     return train_set, validation_set
   
+#-----------------
 
 def encode(text, stoi):
   list_integers = []
@@ -28,6 +32,7 @@ def encode(text, stoi):
 
   return list_integers
 
+#-----------------
 
 def decode(list_integers, itos):
   text = []
@@ -36,6 +41,8 @@ def decode(list_integers, itos):
 
   text = ''.join(c for c in text) #delete this line if you want a list of char instead of a str
   return text
+    
+#-----------------
 
 def get_batch(split, block_size, batch_size, device, train_set, validation_set): #split is either "train" or "eval"
   assert split in ["train", "eval"], "split must be 'train' or 'eval'"
@@ -48,6 +55,7 @@ def get_batch(split, block_size, batch_size, device, train_set, validation_set):
 
   x, y = x.to(device), y.to(device)
   return x, y
+#-----------------
 
 @torch.no_grad()
 def estimate_loss(m, eval_iters, train_set, evalutation_set, block_size, batch_size, device):
@@ -62,3 +70,16 @@ def estimate_loss(m, eval_iters, train_set, evalutation_set, block_size, batch_s
     out[split] = losses.mean()
   m.train()
   return out
+#-----------------
+
+class WeightManager:
+    def __init__(self, file_path):
+        self.file_path = file_path
+
+    def save_weights(self, model):
+        torch.save(model.state_dict(), self.file_path)
+
+    def load_weights(self, model):
+        model.load_state_dict(torch.load(self.file_path))
+        model.eval()  # Set the model to evaluation mode
+
