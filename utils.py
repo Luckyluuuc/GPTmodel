@@ -1,4 +1,5 @@
 import torch
+import re
 
 def tokenize_text(text):
     # Use a regular expression to tokenize the text into words while preserving spaces and line breaks
