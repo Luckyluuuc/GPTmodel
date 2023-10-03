@@ -25,9 +25,7 @@ You can customize all the hyperparameters according to your needs and then execu
 
 ## result 
 
-This is a sample of the best result I could have by training the model for less than an hour (between 30min and 1 hours), this is not perfect but we can imagine that by scaling up the model (augmenting the number of head, of context, and training for longuer) we could obtain really satisfying result
-
-Here is an example of the optimal output obtained from training the model for a relatively short duration, typically between 30 minutes and 1 hour. Although it is not flawless, we can imagine achieving considerably better results by upscaling the model (augmenting the number of heads, expanding the context, and extending the training duration etc..). 
+Here is samples of the best output I could get from training the model for a relatively short duration, typically between 30 minutes and 1 hour. Although it is not flawless, the generated text shows a somewhat coherent structure and word sequences that are close to having a consistent meaning. We can imagine achieving considerably better results by upscaling the model (augmenting the number of heads, expanding the context, and extending the training duration etc..). 
 
 ### At character level 
 
