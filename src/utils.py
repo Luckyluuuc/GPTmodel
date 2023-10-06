@@ -28,7 +28,7 @@ def splitting_data(frac, data):
 def encode(text, stoi):
   list_integers = []
   for c in text:
-    list_integers.append(stoi.get(c))
+    list_integers.append(stoi.get(c, 2)) # if the word is not in the dictionary it encode it as a space
 
   return list_integers
 
