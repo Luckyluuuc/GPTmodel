@@ -3,7 +3,7 @@ import re
 
 #-----------------
 
-def tokenize_text(text):
+def tokenize_text(text): #function to transform the text in a list of word when we want to train the model at word level
     # Use a regular expression to tokenize the text into words while preserving spaces and line breaks
     tokens =  re.findall(r'\w+|[\.,;!?"]+|\n|\t|.', text)
     return tokens
@@ -17,7 +17,7 @@ def mapp(text): # return 2 dictionnaries mapping each token to an integers and v
   return vocab_size, stoi, itos
 #-----------------
 
-def splitting_data(frac, data):
+def splitting_data(frac, data): #split the data in validation_set and training_set
     z = int(frac*len(data))
     train_set = data[:z]
     validation_set = data[z:]
@@ -25,7 +25,7 @@ def splitting_data(frac, data):
   
 #-----------------
 
-def encode(text, stoi):
+def encode(text, stoi): #encode a list of token into a list of integers 
   list_integers = []
   for c in text:
     list_integers.append(stoi.get(c, 2)) # if the word is not in the dictionary it encode it as a space
@@ -34,12 +34,12 @@ def encode(text, stoi):
 
 #-----------------
 
-def decode(list_integers, itos):
+def decode(list_integers, itos): #decode a list of integer into a string
   text = []
   for i in list_integers:
     text.append(itos.get(i))
 
-  text = ''.join(c for c in text) #delete this line if you want a list of char instead of a str
+  text = ''.join(c for c in text) #delete this line if you want a list of token instead of a str
   return text
     
 #-----------------
@@ -58,7 +58,7 @@ def get_batch(split, block_size, batch_size, device, train_set, validation_set):
 #-----------------
 
 @torch.no_grad()
-def estimate_loss(m, eval_iters, train_set, evalutation_set, block_size, batch_size, device):
+def estimate_loss(m, eval_iters, train_set, evalutation_set, block_size, batch_size, device): 
   out = {}
   m.eval()
   for split in ["train", "eval"]:
@@ -72,7 +72,7 @@ def estimate_loss(m, eval_iters, train_set, evalutation_set, block_size, batch_s
   return out
 #-----------------
 
-class WeightManager:
+class WeightManager: #class to manage the savings of the weigths
     def __init__(self, file_path):
         self.file_path = file_path
 
