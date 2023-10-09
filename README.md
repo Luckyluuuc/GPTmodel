@@ -7,7 +7,7 @@ The primary objective of this project is to deepen our understanding of the Tran
 You can find details of these steps in the experimental notebooks.
 
 ### Bigram Model
-Initially, I attempted to implement a simple bigram model, which predicted the most probable character based on the preceding characters. The results were predictably not very satisfactory, but this approach helped me grasp the fundamental workings of the model.
+Initially, I attempted to implement a simple bigram model, which predicted the most probable character **based on the preceding characters**. The results were predictably not very satisfactory, but this approach helped me grasp the fundamental workings of the model.
 
 ### GPT Model at Character Level
 Subsequently, still following the video, I enhanced the model by implementing multihead attention, ultimately achieving a model closely resembling the decoder described in the 2017 paper.
@@ -19,13 +19,13 @@ Driven by curiosity to explore word-level predictions rather than character-leve
 
 To utilize the model, simply launch the main notebook, which is a cleaned version of the GPT model at the word level. The notebook includes monitoring of the loss using the Weights and Biases library, as well as saving of the weights during training.
 
-You can customize all the hyperparameters according to your needs and then execute the code. Feel free to modify the training corpus. Also, remember to set the word_level boolean variable to the appropriate value based on whether you want to train your model at the character level or the word level.
+You can customize all the hyperparameters according to your needs and then execute the code. Feel free to modify the training corpus. Also, remember to set the **word_level boolean** variable to the appropriate value based on whether you want to train your model at the **character level** or the **word level**.
 
 
 
 ## result 
 
-Here is samples of the best output I could get from training the model for a relatively short duration, typically between 30 minutes and 1 hour. Although it is not flawless, the generated text shows a somewhat coherent structure and word sequences that are close to having a consistent meaning. We can imagine achieving considerably better results by upscaling the model (augmenting the number of heads, expanding the context, and extending the training duration etc..). 
+Here is samples of the best output I could get from training the model for a relatively short duration, typically between **20 - 30 minutes** (on a T4 GPU provided by google colab). Although it is not flawless, the generated text shows a somewhat **coherent structure** and word sequences that are close to having a consistent meaning. We can imagine achieving considerably better results by **upscaling** the model (augmenting the number of heads, expanding the context, and extending the training duration etc..). 
 
 ### At character level 
 
