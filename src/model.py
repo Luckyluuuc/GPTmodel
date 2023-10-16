@@ -28,7 +28,7 @@ class Head(nn.Module):
         
         # for the self mask attention
         self.register_buffer('tril', torch.tril(torch.ones(cfg['block_size'], cfg['block_size'])))
-        self.dropout = nn.Dropout(cfg['dropout'])
+        self.dropout = nn.Dropout(cfg['dropout']) #we use dropout in order to prevent/reduce overfitting 
 
 
     def forward(self, x):
@@ -52,9 +52,9 @@ class Head(nn.Module):
 
 class MultiHeadAttention(nn.Module):
     """
-    Using the head class, it implitments the multi_head attention.
+    Using the head class, it implements the multi_head attention.
 
-    The idea is to use different head, so that each head can specialize in somthing different. 
+    The idea is to use different head, so that each head can specialize in something different. 
     And at the end we concatenate the result so that we have a more complete embedding
 
     Args:
