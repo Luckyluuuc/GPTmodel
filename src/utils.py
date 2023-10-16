@@ -56,12 +56,12 @@ def get_batch(split, block_size, batch_size, device, train_set, validation_set):
   x, y = x.to(device), y.to(device)
   return x, y
 #-----------------
-
-@torch.no_grad()
+#objective : calculate the training/validation loss on several iters ("eval_iters" iterations) 
+@torch.no_grad() #we don't want to calculate any gradient with this function
 def estimate_loss(m, eval_iters, train_set, evalutation_set, block_size, batch_size, device): 
   out = {}
-  m.eval()
-  for split in ["train", "eval"]:
+  m.eval() # to desactivate layer that are relevant in training only, e.g. dropout 
+  for split in ["train", "eval"]: # we calculate the loss on both the training set and validation set
     losses = torch.zeros(eval_iters)
     for k in range(eval_iters):
       X, Y = get_batch(split, block_size, batch_size, device, train_set, evalutation_set)
